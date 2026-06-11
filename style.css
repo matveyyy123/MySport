@@ -11,10 +11,10 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     color: #1e293b;
+    min-height: 100vh;
 }
-
-/* ЗАМЕНИ весь блок splash-screen на это */
 
 .splash-screen {
     position: fixed;
@@ -56,30 +56,36 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Удали всё что связано с .splash-card, .splash-icon */
-
 .hidden {
     display: none !important;
 }
 
+/* ГЛАВНОЕ МЕНЮ - с фиксированной шапкой */
 .main-menu {
     max-width: 500px;
     margin: 0 auto;
     min-height: 100vh;
-    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(244, 246, 250, 0.95);
 }
 
 .hero-photo {
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 100%;
     height: 260px;
+    max-height: 260px;
     overflow: hidden;
+    z-index: 10;
+    flex-shrink: 0;
 }
 
 .hero-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .hero-overlay {
@@ -107,6 +113,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 40px;
 }
 
 .workout-card {
@@ -118,6 +127,8 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+    height: 140px;
+    flex-shrink: 0;
 }
 
 .workout-card:active {
@@ -132,6 +143,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: 100%;
 }
 
 .card-info h3 {
@@ -161,25 +173,33 @@ body {
 .card-image {
     width: 33.333%;
     overflow: hidden;
+    height: 100%;
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
+    display: block;
 }
 
+/* ЭКРАН ТРЕНИРОВКИ - с фиксированной шапкой */
 .workout-screen {
     max-width: 500px;
     margin: 0 auto;
-    background: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .workout-header {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-shrink: 0;
+    background-color: white;
 }
 
 .back-btn {
@@ -207,12 +227,15 @@ body {
     position: relative;
     width: 100%;
     height: 280px;
+    max-height: 280px;
+    overflow: hidden;
 }
 
 .workout-hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .hero-gradient {
@@ -253,6 +276,8 @@ body {
     flex-direction: column;
     gap: 16px;
     background: #f8fafc;
+    overflow-y: auto;
+    padding-bottom: 100px;
 }
 
 .exercise-item {
@@ -277,6 +302,7 @@ body {
     color: white;
     font-weight: bold;
     font-size: 1.1rem;
+    flex-shrink: 0;
 }
 
 .exercise-details {
@@ -295,9 +321,13 @@ body {
 }
 
 .start-button-container {
+    position: sticky;
+    bottom: 0;
     padding: 20px 20px 34px;
     background: #f8fafc;
     border-top: 1px solid #e2e8f0;
+    z-index: 10;
+    flex-shrink: 0;
 }
 
 .start-btn {
@@ -334,77 +364,4 @@ body {
     .splash-text {
         font-size: 1.4rem;
     }
-}
-
-/* Добавь это в конец файла style.css */
-
-/* Ограничения для фоток в карточках тренировок */
-.card-image {
-    width: 33.333%;
-    overflow: hidden;
-    height: 100%;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    display: block;
-}
-
-/* Ограничение для верхней фотографии в главном меню */
-.hero-photo {
-    position: relative;
-    width: 100%;
-    height: 260px;
-    max-height: 260px;
-    overflow: hidden;
-}
-
-.hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Ограничение для фотографии в экране тренировки */
-.workout-hero {
-    position: relative;
-    width: 100%;
-    height: 280px;
-    max-height: 280px;
-    overflow: hidden;
-}
-
-.workout-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Чтобы карточки не раздувались */
-.workout-card {
-    display: flex;
-    width: 100%;
-    background: white;
-    border-radius: 28px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    height: 140px;
-}
-
-.card-info {
-    width: 66.666%;
-    padding: 20px 16px;
-    color: white;
-    background-color: #4682B4;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 100%;
 }
