@@ -9,6 +9,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: #26455f;
 }
 
 body {
@@ -368,7 +369,7 @@ body {
 .active-top-block {
     flex: 1;
     position: relative;
-    background-color: #ffffff;
+    background-color: transparent;
     min-height: 0;
     overflow: hidden;
 }
@@ -604,6 +605,7 @@ body {
     color: #4682B4;
     cursor: pointer;
     transition: 0.2s;
+    margin-bottom: 30px;
 }
 
 .finish-close-btn:active {

@@ -48,21 +48,43 @@ const workoutsData = {
         exercisesCount: "10 упражнений",
         heroImg: "images/chest.jpg",
         exercises: [
-            { name: "Отжимания от коленей", reps: "2x12", img: "images/exercises/chest1.jpg" },
-            { name: "Отжимания с упором спереди", reps: "2x12", img: "images/exercises/chest2.jpg" },
-            { name: "Отжимания от пола", reps: "2x12", img: "images/exercises/chest3.jpg" },
+            { name: "Отжимания от коленей", reps: "3x12", img: "images/exercises/chest1.jpg" },
+            { name: "Отжимания с упором спереди", reps: "3x12", img: "images/exercises/chest2.jpg" },
+            { name: "Отжимания от пола", reps: "3x12", img: "images/exercises/chest3.jpg" },
             { name: "Лежа поднятия гантелей от плеч наверх", reps: "3x12", img: "images/exercises/chest4.jpg" },
-            { name: "Отжимания с упором сзади", reps: "2x12", img: "images/exercises/chest5.jpg" },
-            { name: "Обратные отжимания от стула", reps: "2x12", img: "images/exercises/chest6.jpg" },
-            { name: "Широкие отжимания", reps: "2x12", img: "images/exercises/chest7.jpg" },
+            { name: "Отжимания с упором сзади", reps: "3x12", img: "images/exercises/chest5.jpg" },
+            { name: "Обратные отжимания от стула", reps: "3x12", img: "images/exercises/chest6.jpg" },
+            { name: "Широкие отжимания", reps: "3x12", img: "images/exercises/chest7.jpg" },
             { name: "Лежа поднятия гантелей от груди наверх", reps: "3x12", img: "images/exercises/chest8.jpg" },
-            { name: "Отжимания со сведенными ладонями", reps: "2x12", img: "images/exercises/chest9.jpg" },
+            { name: "Отжимания со сведенными ладонями", reps: "3x12", img: "images/exercises/chest9.jpg" },
             { name: "Лежа поднятие гантелей от сторон наверх", reps: "3x12", img: "images/exercises/chest10.jpg" }
         ]
     }
 };
 
+// ЗАГРУЗКА СОХРАНЕННЫХ ДАННЫХ
 let completions = { arms: 0, abs: 0, chest: 0 };
+
+function loadCompletions() {
+    const saved = localStorage.getItem('workoutCompletions');
+    if (saved) {
+        completions = JSON.parse(saved);
+    }
+}
+
+function saveCompletions() {
+    localStorage.setItem('workoutCompletions', JSON.stringify(completions));
+}
+
+function updateCompletionDisplay() {
+    const armsCard = document.querySelector('.workout-card[data-workout="arms"] .completed-count');
+    const absCard = document.querySelector('.workout-card[data-workout="abs"] .completed-count');
+    const chestCard = document.querySelector('.workout-card[data-workout="chest"] .completed-count');
+    if (armsCard) armsCard.textContent = `Выполнено: ${completions.arms} раз`;
+    if (absCard) absCard.textContent = `Выполнено: ${completions.abs} раз`;
+    if (chestCard) chestCard.textContent = `Выполнено: ${completions.chest} раз`;
+}
+
 let currentWorkoutType = null;
 let currentExerciseIndex = 0;
 let timerInterval = null;
@@ -90,14 +112,8 @@ const finishWorkoutName = document.getElementById('finish-workout-name');
 const finishExercisesCount = document.getElementById('finish-exercises-count');
 const finishDuration = document.getElementById('finish-duration');
 
-function updateCompletionDisplay() {
-    const armsCard = document.querySelector('.workout-card[data-workout="arms"] .completed-count');
-    const absCard = document.querySelector('.workout-card[data-workout="abs"] .completed-count');
-    const chestCard = document.querySelector('.workout-card[data-workout="chest"] .completed-count');
-    if (armsCard) armsCard.textContent = `Выполнено: ${completions.arms} раз`;
-    if (absCard) absCard.textContent = `Выполнено: ${completions.abs} раз`;
-    if (chestCard) chestCard.textContent = `Выполнено: ${completions.chest} раз`;
-}
+// Загружаем сохраненные данные при старте
+loadCompletions();
 
 setTimeout(() => {
     if (splash) {
@@ -222,7 +238,9 @@ function showFinishScreen() {
     const exercisesCount = data.exercises.length;
     const durationFormatted = timerDisplay.textContent;
     
+    // Увеличиваем счетчик и СОХРАНЯЕМ
     completions[currentWorkoutType]++;
+    saveCompletions();
     updateCompletionDisplay();
     
     finishWorkoutName.textContent = data.name;
