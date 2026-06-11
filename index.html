@@ -31,7 +31,7 @@
                     <div class="completed-count">Выполнено: 0 раз</div>
                 </div>
                 <div class="card-image">
-                    <img src="images/arms.jpg" alt="Руки" >
+                    <img src="images/arms.jpg" alt="Руки">
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                     <h3>ПРЕСС</h3>
                     <div class="stats">
                         <span>20 минут</span>
-                        <span>18 упражнений</span>
+                        <span>21 упражнение</span>
                     </div>
                     <div class="completed-count">Выполнено: 0 раз</div>
                 </div>
@@ -61,7 +61,7 @@
                     <h2 id="workout-name">РУКИ</h2>
                     <div class="workout-meta">
                         <span id="workout-time">25 минут</span>
-                        <span id="workout-exercises-count">6 упражнений</span>
+                        <span id="workout-exercises-count">9 упражнений</span>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,54 @@
 
         <div class="start-button-container">
             <button id="start-workout-btn" class="start-btn">СТАРТ</button>
+        </div>
+    </div>
+
+    <!-- НОВЫЙ ЭКРАН АКТИВНОЙ ТРЕНИРОВКИ -->
+    <div id="active-workout-screen" class="active-workout-screen hidden">
+        <div class="active-top-block">
+            <button class="active-back-btn" id="active-back-btn">← Назад</button>
+            <div class="exercise-counter" id="exercise-counter">Упражнение 1 / 20</div>
+            <div class="timer-display" id="timer-display">00:00</div>
+            <div class="active-hero">
+                <img id="active-exercise-img" src="">
+            </div>
+        </div>
+        
+        <div class="active-bottom-block">
+            <h3 class="active-exercise-name" id="active-exercise-name">Название упражнения</h3>
+            <div class="active-exercise-reps" id="active-exercise-reps">3x12</div>
+            <div class="nav-buttons">
+                <button id="prev-exercise-btn" class="nav-btn prev-btn hidden">НАЗАД</button>
+                <button id="next-exercise-btn" class="nav-btn next-btn">ДАЛЕЕ</button>
+                <button id="finish-exercise-btn" class="nav-btn finish-btn hidden">ФИНИШ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОКНО ФИНИША -->
+    <div id="finish-screen" class="finish-screen hidden">
+        <div class="finish-top-block">
+            <div class="finish-hero">
+                <img id="finish-hero-img" src="images/finish.jpg" alt="">
+            </div>
+            <div class="finish-overlay">
+                <div class="finish-title">ТРЕНИРОВКА ВЫПОЛНЕНА!</div>
+            </div>
+        </div>
+        <div class="finish-bottom-block">
+            <div class="finish-workout-name" id="finish-workout-name">РУКИ</div>
+            <div class="finish-stats">
+                <div class="finish-stat">
+                    <div class="finish-stat-value" id="finish-exercises-count">9</div>
+                    <div class="finish-stat-label">Упражнений</div>
+                </div>
+                <div class="finish-stat">
+                    <div class="finish-stat-value" id="finish-duration">00:00</div>
+                    <div class="finish-stat-label">Длительность</div>
+                </div>
+            </div>
+            <button class="finish-close-btn" id="finish-close-btn">ЗАКОНЧИТЬ</button>
         </div>
     </div>
 

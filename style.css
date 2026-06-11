@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #2e5372;
+    background-color: #26455f;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -60,14 +60,13 @@ body {
     display: none !important;
 }
 
-/* ГЛАВНОЕ МЕНЮ - с фиксированной шапкой */
 .main-menu {
     max-width: 500px;
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: rgba(244, 246, 250, 0.95);
+    background-color: #26455f;
 }
 
 .hero-photo {
@@ -184,7 +183,6 @@ body {
     display: block;
 }
 
-/* ЭКРАН ТРЕНИРОВКИ - с фиксированной шапкой */
 .workout-screen {
     max-width: 500px;
     margin: 0 auto;
@@ -350,6 +348,257 @@ body {
     background: #3a6e9a;
 }
 
+/* АКТИВНАЯ ТРЕНИРОВКА - НОВЫЙ ЭКРАН */
+.active-workout-screen {
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.active-top-block {
+    flex: 1;
+    position: relative;
+    background-color: #000;
+}
+
+.active-back-btn {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 15;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.exercise-counter {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 15;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.timer-display {
+    position: absolute;
+    top: 70px;
+    right: 18px;
+    z-index: 15;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.active-hero {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.active-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.active-bottom-block {
+    flex: 0.6;
+    background-color: #4682B4;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px 30px 0 0;
+}
+
+.active-exercise-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.active-exercise-reps {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 40px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 16px 0;
+    border: none;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: white;
+    color: #4682B4;
+}
+
+.nav-btn:active {
+    transform: scale(0.97);
+}
+
+.prev-btn {
+    background-color: rgba(255,255,255,0.3);
+    color: white;
+}
+
+.next-btn {
+    background-color: white;
+    color: #4682B4;
+}
+
+.finish-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.hidden-btn {
+    display: none;
+}
+
+
+/* Стили для окна финиша - исправленные */
+.finish-screen {
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.finish-top-block {
+    flex: 1;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.finish-hero {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.finish-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.finish-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,1), transparent);
+    padding: 40px 20px 30px;
+}
+
+.finish-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.finish-bottom-block {
+    background-color: #000000;
+    padding: 30px 24px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.finish-workout-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.finish-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.finish-stat {
+    text-align: center;
+}
+
+.finish-stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+}
+
+.finish-stat-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 8px;
+}
+
+.finish-close-btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #4682B4;
+    border: none;
+    padding: 16px 0;
+    border-radius: 60px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.finish-close-btn:active {
+    transform: scale(0.97);
+}
+
 @media (max-width: 450px) {
     .card-info h3 {
         font-size: 1.5rem;
@@ -362,6 +611,9 @@ body {
         font-size: 24px;
     }
     .splash-text {
+        font-size: 1.4rem;
+    }
+    .active-exercise-name {
         font-size: 1.4rem;
     }
 }
