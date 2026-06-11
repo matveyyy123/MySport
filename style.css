@@ -71,7 +71,7 @@ body {
 
 .hero-photo {
     position: sticky;
-    margin-top: -44px;
+    top: 0;
     width: 100%;
     height: 260px;
     max-height: 260px;
@@ -186,7 +186,7 @@ body {
 .workout-screen {
     max-width: 500px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #26455f;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -197,7 +197,7 @@ body {
     top: 0;
     z-index: 10;
     flex-shrink: 0;
-    background-color: white;
+    background-color: #26455f;
 }
 
 .back-btn {
@@ -355,7 +355,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #26455f;
+    background-color: #ffffff;
 }
 
 .active-top-block {
