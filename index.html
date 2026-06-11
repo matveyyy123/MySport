@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>SportApp — Тренировки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="splash" class="splash-screen">
+        <div class="splash-text">ЖЕЛАЮ ТЕБЕ ОТЛИЧНОЙ ТРЕНИРОВКИ!</div>
+        <div class="loader"></div>
+    </div>
+
+    <div id="main-menu" class="main-menu hidden">
+        <div class="hero-photo">
+            <img src="images/hero.jpg" alt="Спорт">
+            <div class="hero-overlay"></div>
+            <div class="hero-title">ТВОИ ТРЕНИРОВКИ</div>
+        </div>
+
+        <div class="workout-list">
+            <div class="workout-card" data-workout="arms">
+                <div class="card-info" style="background-color: #4682B4;">
+                    <h3>РУКИ</h3>
+                    <div class="stats">
+                        <span>25 минут</span>
+                        <span>6 упражнений</span>
+                    </div>
+                    <div class="completed-count">Выполнено: 0 раз</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/arms.jpg" alt="Руки" >
+                </div>
+            </div>
+
+            <div class="workout-card" data-workout="abs">
+                <div class="card-info" style="background-color: #4682B4;">
+                    <h3>ПРЕСС</h3>
+                    <div class="stats">
+                        <span>20 минут</span>
+                        <span>8 упражнений</span>
+                    </div>
+                    <div class="completed-count">Выполнено: 0 раз</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/abs.jpg" alt="Пресс">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="workout-screen" class="workout-screen hidden">
+        <div class="workout-header">
+            <button class="back-btn" id="back-to-menu">Назад</button>
+            <div class="workout-hero">
+                <img id="workout-hero-img" src="" alt="Тренировка">
+                <div class="hero-gradient"></div>
+                <div class="workout-hero-info">
+                    <h2 id="workout-name">РУКИ</h2>
+                    <div class="workout-meta">
+                        <span id="workout-time">25 минут</span>
+                        <span id="workout-exercises-count">6 упражнений</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercises-list" id="exercises-list"></div>
+
+        <div class="start-button-container">
+            <button id="start-workout-btn" class="start-btn">СТАРТ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
