@@ -41,10 +41,28 @@ const workoutsData = {
             { name: "Планка с боковым сгибанием ног (альпинист)", reps: "1x12", img: "images/exercises/abs17.jpg" },
             { name: "V-планка сидя на ягодицах", reps: "1x12", img: "images/exercises/abs18.jpg" }
         ]
+    },
+    chest: {
+        name: "ГРУДЬ",
+        time: "25 минут",
+        exercisesCount: "10 упражнений",
+        heroImg: "images/chest.jpg",
+        exercises: [
+            { name: "Отжимания от коленей", reps: "2x12", img: "images/exercises/chest1.jpg" },
+            { name: "Отжимания с упором спереди", reps: "2x12", img: "images/exercises/chest2.jpg" },
+            { name: "Отжимания от пола", reps: "2x12", img: "images/exercises/chest3.jpg" },
+            { name: "Лежа поднятия гантелей от плеч наверх", reps: "3x12", img: "images/exercises/chest4.jpg" },
+            { name: "Отжимания с упором сзади", reps: "2x12", img: "images/exercises/chest5.jpg" },
+            { name: "Обратные отжимания от стула", reps: "2x12", img: "images/exercises/chest6.jpg" },
+            { name: "Широкие отжимания", reps: "2x12", img: "images/exercises/chest7.jpg" },
+            { name: "Лежа поднятия гантелей от груди наверх", reps: "3x12", img: "images/exercises/chest8.jpg" },
+            { name: "Отжимания со сведенными ладонями", reps: "2x12", img: "images/exercises/chest9.jpg" },
+            { name: "Лежа поднятие гантелей от сторон наверх", reps: "3x12", img: "images/exercises/chest10.jpg" }
+        ]
     }
 };
 
-let completions = { arms: 0, abs: 0 };
+let completions = { arms: 0, abs: 0, chest: 0 };
 let currentWorkoutType = null;
 let currentExerciseIndex = 0;
 let timerInterval = null;
@@ -75,8 +93,10 @@ const finishDuration = document.getElementById('finish-duration');
 function updateCompletionDisplay() {
     const armsCard = document.querySelector('.workout-card[data-workout="arms"] .completed-count');
     const absCard = document.querySelector('.workout-card[data-workout="abs"] .completed-count');
+    const chestCard = document.querySelector('.workout-card[data-workout="chest"] .completed-count');
     if (armsCard) armsCard.textContent = `Выполнено: ${completions.arms} раз`;
     if (absCard) absCard.textContent = `Выполнено: ${completions.abs} раз`;
+    if (chestCard) chestCard.textContent = `Выполнено: ${completions.chest} раз`;
 }
 
 setTimeout(() => {
@@ -263,6 +283,7 @@ document.querySelectorAll('.workout-card').forEach(card => {
         const workout = card.getAttribute('data-workout');
         if (workout === 'arms') openWorkout('arms');
         else if (workout === 'abs') openWorkout('abs');
+        else if (workout === 'chest') openWorkout('chest');
     });
 });
 

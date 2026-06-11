@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+        <style>
+        /* Чтобы контент был под статусбаром */
+        .main-menu {
+            padding-top: env(safe-area-inset-top, 0);
+        }
+    </style>
     <title>SportApp — Тренировки</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -40,12 +46,26 @@
                     <h3>ПРЕСС</h3>
                     <div class="stats">
                         <span>20 минут</span>
-                        <span>21 упражнение</span>
+                        <span>18 упражнений</span>
                     </div>
                     <div class="completed-count">Выполнено: 0 раз</div>
                 </div>
                 <div class="card-image">
                     <img src="images/abs.jpg" alt="Пресс">
+                </div>
+            </div>
+
+            <div class="workout-card" data-workout="chest">
+                <div class="card-info" style="background-color: #4682B4;">
+                    <h3>ГРУДЬ</h3>
+                    <div class="stats">
+                        <span>25 минут</span>
+                        <span>10 упражнений</span>
+                    </div>
+                    <div class="completed-count">Выполнено: 0 раз</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/chest.jpg" alt="Грудь">
                 </div>
             </div>
         </div>
@@ -74,7 +94,6 @@
         </div>
     </div>
 
-    <!-- НОВЫЙ ЭКРАН АКТИВНОЙ ТРЕНИРОВКИ -->
     <div id="active-workout-screen" class="active-workout-screen hidden">
         <div class="active-top-block">
             <button class="active-back-btn" id="active-back-btn">← Назад</button>
@@ -96,7 +115,6 @@
         </div>
     </div>
 
-    <!-- ОКНО ФИНИША -->
     <div id="finish-screen" class="finish-screen hidden">
         <div class="finish-top-block">
             <div class="finish-hero">
