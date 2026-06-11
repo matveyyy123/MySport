@@ -491,7 +491,7 @@ body {
 }
 
 
-/* Стили для окна финиша - исправленные */
+/* Стили для окна финиша - компактная версия */
 .finish-screen {
     max-width: 500px;
     margin: 0 auto;
@@ -508,9 +508,10 @@ body {
 }
 
 .finish-top-block {
-    flex: 1;
+    flex: 0.7;
     position: relative;
     background-color: #ffffff;
+    min-height: 0;
 }
 
 .finish-hero {
@@ -531,12 +532,12 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,1), transparent);
-    padding: 40px 20px 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 20px 20px 15px;
 }
 
 .finish-title {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: white;
     text-align: center;
@@ -544,24 +545,24 @@ body {
 }
 
 .finish-bottom-block {
-    background-color: #000000;
-    padding: 30px 24px 40px;
+    background-color: #4682B4;
+    padding: 20px 20px 30px;
     display: flex;
     flex-direction: column;
 }
 
 .finish-workout-name {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .finish-stats {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .finish-stat {
@@ -569,26 +570,26 @@ body {
 }
 
 .finish-stat-value {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     color: white;
 }
 
 .finish-stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: rgba(255,255,255,0.8);
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 .finish-close-btn {
-    width: 100%;
-    max-width: 300px;
+    width: 80%;
+    max-width: 250px;
     margin: 0 auto;
     background-color: white;
     border: none;
-    padding: 16px 0;
-    border-radius: 60px;
-    font-size: 1.3rem;
+    padding: 12px 0;
+    border-radius: 50px;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #4682B4;
     cursor: pointer;
