@@ -348,20 +348,27 @@ body {
     background: #3a6e9a;
 }
 
-/* АКТИВНАЯ ТРЕНИРОВКА - НОВЫЙ ЭКРАН */
+/* АКТИВНАЯ ТРЕНИРОВКА - закрепленные блоки */
 .active-workout-screen {
     max-width: 500px;
     margin: 0 auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
 }
 
 .active-top-block {
     flex: 1;
     position: relative;
-    background-color: #000;
+    background-color: #ffffff;
+    min-height: 0;
 }
 
 .active-back-btn {
@@ -425,16 +432,16 @@ body {
 }
 
 .active-bottom-block {
-    flex: 0.6;
     background-color: #4682B4;
-    padding: 30px 24px;
+    padding: 25px 24px 40px;
     display: flex;
     flex-direction: column;
     border-radius: 30px 30px 0 0;
+    flex-shrink: 0;
 }
 
 .active-exercise-name {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: white;
     margin-bottom: 12px;
@@ -442,7 +449,7 @@ body {
 }
 
 .active-exercise-reps {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: rgba(255,255,255,0.9);
     margin-bottom: 40px;
 }
@@ -456,10 +463,10 @@ body {
 
 .nav-btn {
     flex: 1;
-    padding: 16px 0;
+    padding: 14px 0;
     border: none;
     border-radius: 60px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
@@ -482,8 +489,8 @@ body {
 }
 
 .finish-btn {
-    background-color: #ff6b6b;
-    color: white;
+    background-color: white;
+    color: #4682B4;
 }
 
 .hidden-btn {
@@ -491,7 +498,7 @@ body {
 }
 
 
-/* Стили для окна финиша - компактная версия */
+/* ФИНИШ - закрепленные блоки */
 .finish-screen {
     max-width: 500px;
     margin: 0 auto;
@@ -508,7 +515,7 @@ body {
 }
 
 .finish-top-block {
-    flex: 0.7;
+    flex: 1;
     position: relative;
     background-color: #ffffff;
     min-height: 0;
@@ -532,7 +539,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
     padding: 20px 20px 15px;
 }
 
@@ -546,9 +553,10 @@ body {
 
 .finish-bottom-block {
     background-color: #4682B4;
-    padding: 20px 20px 30px;
+    padding: 25px 24px 40px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .finish-workout-name {
@@ -556,13 +564,13 @@ body {
     font-weight: 700;
     color: white;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .finish-stats {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .finish-stat {
@@ -587,8 +595,8 @@ body {
     margin: 0 auto;
     background-color: white;
     border: none;
-    padding: 12px 0;
-    border-radius: 50px;
+    padding: 14px 0;
+    border-radius: 60px;
     font-size: 1.2rem;
     font-weight: 700;
     color: #4682B4;
