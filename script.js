@@ -94,11 +94,28 @@ const workoutsData = {
             { name: "Отжимания со сведенными ладонями", reps: "3x12", img: "images/exercises/chest9.jpg" },
             { name: "Лежа поднятие гантелей от сторон наверх", reps: "3x12", img: "images/exercises/chest10.jpg" }
         ]
+    },
+    back: {
+        name: "СПИНА",
+        time: "35 минут",
+        exercisesCount: "9 упражнений",
+        heroImg: "images/back.jpg",
+        exercises: [
+            { name: "Гиперэкстензия (лодочка) лёжа на животе", reps: "3x12", img: "images/exercises/back1.jpg" },
+            { name: "V-отжимания", reps: "3x12", img: "images/exercises/back2.jpg" },
+            { name: "Подтягивания широким хватом", reps: "3x12", img: "images/exercises/back3.jpg" },
+            { name: "Тяга двух гантелей в наклоне", reps: "3x12", img: "images/exercises/back4.jpg" },
+            { name: "Разведение гантелей в наклоне (задняя дельта/трапеция)", reps: "3x12", img: "images/exercises/back5.jpg" },
+            { name: "Подтягивания узким параллельным хватом", reps: "3x12", img: "images/exercises/back6.jpg" },
+            { name: "Подъем корпуса лёжа на животе (руки за головой)", reps: "3x12", img: "images/exercises/back7.jpg" },
+            { name: "Пуловер с одной гантелью лёжа на скамье/полу", reps: "3x12", img: "images/exercises/back8.jpg" },
+            { name: "Шраги с гантелями (трапеции)", reps: "3x12", img: "images/exercises/back9.jpg" }
+        ]
     }
 };
 
 // ЗАГРУЗКА СОХРАНЕННЫХ ДАННЫХ
-let completions = { warmup: 0, legs: 0, arms: 0, abs: 0, chest: 0 };
+let completions = { warmup: 0, legs: 0, arms: 0, abs: 0, chest: 0, back: 0 };
 
 function loadCompletions() {
     const saved = localStorage.getItem('workoutCompletions');
@@ -117,11 +134,19 @@ function updateCompletionDisplay() {
     const armsCard = document.querySelector('.workout-card[data-workout="arms"] .completed-count');
     const absCard = document.querySelector('.workout-card[data-workout="abs"] .completed-count');
     const chestCard = document.querySelector('.workout-card[data-workout="chest"] .completed-count');
+    const backCard = document.querySelector('.workout-card[data-workout="back"] .completed-count');
     if (warmupCard) warmupCard.textContent = `Выполнено: ${completions.warmup} раз`;
     if (legsCard) legsCard.textContent = `Выполнено: ${completions.legs} раз`;
     if (armsCard) armsCard.textContent = `Выполнено: ${completions.arms} раз`;
     if (absCard) absCard.textContent = `Выполнено: ${completions.abs} раз`;
     if (chestCard) chestCard.textContent = `Выполнено: ${completions.chest} раз`;
+    if (backCard) backCard.textContent = `Выполнено: ${completions.back} раз`;
+}
+
+// ФУНКЦИЯ ДЛЯ СМЕНЫ ФОНА
+function setBodyBackground(color) {
+    document.body.style.backgroundColor = color;
+    document.documentElement.style.backgroundColor = color;
 }
 
 let currentWorkoutType = null;
@@ -161,6 +186,8 @@ setTimeout(() => {
             splash.classList.add('hidden');
             mainMenu.classList.remove('hidden');
             updateCompletionDisplay();
+            // ФОН ГЛАВНОГО ЭКРАНА
+            setBodyBackground('#26455f');
         }, 600);
     }
 }, 2000);
@@ -197,6 +224,8 @@ function openWorkout(workoutType) {
     
     mainMenu.classList.add('hidden');
     workoutScreen.classList.remove('hidden');
+    // ФОН ЭКРАНА СПИСКА УПРАЖНЕНИЙ ПЕРЕД СТАРТОМ
+    setBodyBackground('#f8fafc');
 }
 
 function closeWorkout() {
@@ -210,6 +239,8 @@ function closeWorkout() {
     currentExerciseIndex = 0;
     timerSeconds = 0;
     updateTimerDisplay();
+    // ФОН ГЛАВНОГО ЭКРАНА
+    setBodyBackground('#26455f');
 }
 
 function startActiveWorkout() {
@@ -221,6 +252,8 @@ function startActiveWorkout() {
     activeWorkoutScreen.classList.remove('hidden');
     loadExercise(currentExerciseIndex);
     startTimer();
+    // ФОН ВО ВРЕМЯ ТРЕНИРОВКИ
+    setBodyBackground('#4682B4');
 }
 
 function loadExercise(index) {
@@ -299,6 +332,8 @@ function showFinishScreen() {
     
     activeWorkoutScreen.classList.add('hidden');
     finishScreen.classList.remove('hidden');
+    // ФОН НА ФИНИШЕ
+    setBodyBackground('#4682B4');
 }
 
 function finishWorkoutAndExit() {
@@ -308,6 +343,8 @@ function finishWorkoutAndExit() {
     currentExerciseIndex = 0;
     timerSeconds = 0;
     updateTimerDisplay();
+    // ФОН ГЛАВНОГО ЭКРАНА
+    setBodyBackground('#26455f');
 }
 
 function startTimer() {
@@ -343,6 +380,7 @@ document.querySelectorAll('.workout-card').forEach(card => {
         else if (workout === 'arms') openWorkout('arms');
         else if (workout === 'abs') openWorkout('abs');
         else if (workout === 'chest') openWorkout('chest');
+        else if (workout === 'back') openWorkout('back');
     });
 });
 
