@@ -1,19 +1,54 @@
 const workoutsData = {
+    warmup: {
+        name: "РАЗМИНКА",
+        time: "10 минут",
+        exercisesCount: "9 упражнений",
+        heroImg: "images/warmup.jpg",
+        exercises: [
+            { name: "Вращение головой", reps: "30 сек", img: "images/exercises/warmup1.jpg" },
+            { name: "Махи руками", reps: "30 сек", img: "images/exercises/warmup2.jpg" },
+            { name: "Вращение локтями", reps: "30 сек", img: "images/exercises/warmup3.jpg" },
+            { name: "Вращение кистями", reps: "30 сек", img: "images/exercises/warmup4.jpg" },
+            { name: "Наклоны корпуса", reps: "30 сек", img: "images/exercises/warmup5.jpg" },
+            { name: "Вращение тазом", reps: "30 сек", img: "images/exercises/warmup6.jpg" },
+            { name: "Вращение ногами", reps: "30 сек", img: "images/exercises/warmup7.jpg" },
+            { name: "Приседания без веса", reps: "30 сек", img: "images/exercises/warmup8.jpg" },
+            { name: "Прыжки", reps: "30 сек", img: "images/exercises/warmup9.jpg" }
+        ]
+    },
+    legs: {
+        name: "НОГИ",
+        time: "35 минут",
+        exercisesCount: "9 упражнений",
+        heroImg: "images/legs.jpg",
+        exercises: [
+            { name: "Приседания с гантелями", reps: "3x12", img: "images/exercises/legs1.jpg" },
+            { name: "Выпады с гантелями", reps: "3x12", img: "images/exercises/legs2.jpg" },
+            { name: "Плие-подъемы на носки с гантелями", reps: "3x12", img: "images/exercises/legs3.jpg" },
+            { name: "Болгарские приседания с гантелями", reps: "3x12", img: "images/exercises/legs4.jpg" },
+            { name: "Ягодичный мостик с гантелью", reps: "3x12", img: "images/exercises/legs5.jpg" },
+            { name: "Выпады в сторону с гантелями", reps: "3x12", img: "images/exercises/legs6.jpg" },
+            { name: "Подъемы на носки с гантелями", reps: "3x12", img: "images/exercises/legs7.jpg" },
+            { name: "Приседания плие с гантелью", reps: "3x12", img: "images/exercises/legs8.jpg" },
+            { name: "Глубокие приседания с задержкой с гантелями", reps: "3x12", img: "images/exercises/legs9.jpg" }
+        ]
+    },
     arms: {
         name: "РУКИ",
-        time: "25 минут",
-        exercisesCount: "9 упражнений",
+        time: "50 минут",
+        exercisesCount: "10 упражнений",
         heroImg: "images/arms.jpg",
         exercises: [
             { name: "Жим гантелей над плечами вверх", reps: "3x12", img: "images/exercises/arms1.jpg" },
             { name: "Махи в стороны с гантелями", reps: "3x12", img: "images/exercises/arms2.jpg" },
             { name: "Тяга гантелей в наклоне к плечам", reps: "3x12", img: "images/exercises/arms3.jpg" },
-            { name: "Подъем гантелей на бицепс верт. хватом", reps: "3x12", img: "images/exercises/arms4.jpg" },
-            { name: "Подъем гантелей на бицепс гориз. хватом", reps: "3x12", img: "images/exercises/arms5.jpg" },
+            { name: "Подъем гантелей на бицепс вертикальным хватом", reps: "3x12", img: "images/exercises/arms4.jpg" },
             { name: "Французский жим с гантелью из-за головы", reps: "3x12", img: "images/exercises/arms6.jpg" },
+            { name: "Подъем гантелей на бицепс горизонтальным хватом", reps: "3x12", img: "images/exercises/arms5.jpg" },
+            { name: "Обратные отжимания от стула", reps: "3x12", img: "images/exercises/arms10.jpg" },
             { name: "Жим гантелей от плеч лежа", reps: "3x12", img: "images/exercises/arms7.jpg" },
             { name: "Жим гантелей от груди лежа", reps: "3x12", img: "images/exercises/arms8.jpg" },
-            { name: "Разведение гантелей в стороны лежа", reps: "3x12", img: "images/exercises/arms9.jpg" }
+            { name: "Разведение гантелей в стороны", reps: "3x12", img: "images/exercises/arms9.jpg" }
         ]
     },
     abs: {
@@ -63,7 +98,7 @@ const workoutsData = {
 };
 
 // ЗАГРУЗКА СОХРАНЕННЫХ ДАННЫХ
-let completions = { arms: 0, abs: 0, chest: 0 };
+let completions = { warmup: 0, legs: 0, arms: 0, abs: 0, chest: 0 };
 
 function loadCompletions() {
     const saved = localStorage.getItem('workoutCompletions');
@@ -77,9 +112,13 @@ function saveCompletions() {
 }
 
 function updateCompletionDisplay() {
+    const warmupCard = document.querySelector('.workout-card[data-workout="warmup"] .completed-count');
+    const legsCard = document.querySelector('.workout-card[data-workout="legs"] .completed-count');
     const armsCard = document.querySelector('.workout-card[data-workout="arms"] .completed-count');
     const absCard = document.querySelector('.workout-card[data-workout="abs"] .completed-count');
     const chestCard = document.querySelector('.workout-card[data-workout="chest"] .completed-count');
+    if (warmupCard) warmupCard.textContent = `Выполнено: ${completions.warmup} раз`;
+    if (legsCard) legsCard.textContent = `Выполнено: ${completions.legs} раз`;
     if (armsCard) armsCard.textContent = `Выполнено: ${completions.arms} раз`;
     if (absCard) absCard.textContent = `Выполнено: ${completions.abs} раз`;
     if (chestCard) chestCard.textContent = `Выполнено: ${completions.chest} раз`;
@@ -299,7 +338,9 @@ function updateTimerDisplay() {
 document.querySelectorAll('.workout-card').forEach(card => {
     card.addEventListener('click', () => {
         const workout = card.getAttribute('data-workout');
-        if (workout === 'arms') openWorkout('arms');
+        if (workout === 'warmup') openWorkout('warmup');
+        else if (workout === 'legs') openWorkout('legs');
+        else if (workout === 'arms') openWorkout('arms');
         else if (workout === 'abs') openWorkout('abs');
         else if (workout === 'chest') openWorkout('chest');
     });
