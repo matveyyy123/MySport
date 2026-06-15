@@ -574,3 +574,50 @@ if (document.readyState === 'loading') {
 window.addEventListener('beforeunload', () => {
     saveCompletions();
 });
+
+// Счетчик дней тренировок подряд (streak)
+function updateStreakDisplay() {
+    // Получаем историю тренировок
+    const saved = localStorage.getItem('workoutHistory');
+    if (!saved) return;
+    
+    try {
+        const workouts = JSON.parse(saved);
+        
+        // Считаем сколько дней подряд были тренировки
+        let streak = 0;
+        let currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        
+        while (true) {
+            const dateStr = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+            
+            if (workouts[dateStr] && workouts[dateStr].length > 0) {
+                streak++;
+                currentDate.setDate(currentDate.getDate() - 1);
+            } else {
+                break;
+            }
+        }
+        
+        // Обновляем цифру на странице
+        const streakSpan = document.getElementById('streak-number');
+        if (streakSpan) {
+            streakSpan.textContent = streak;
+        }
+    } catch(e) {
+        console.log('Ошибка подсчета streak');
+    }
+}
+
+// Запускаем при загрузке страницы
+updateStreakDisplay();
+
+// Обновляем после завершения тренировки (перехватываем сохранение)
+const originalSetItem = localStorage.setItem;
+localStorage.setItem = function(key, value) {
+    originalSetItem.apply(this, arguments);
+    if (key === 'workoutHistory') {
+        updateStreakDisplay();
+    }
+};

@@ -18,6 +18,10 @@
             <img src="images/hero.jpg" alt="Спорт">
             <div class="hero-overlay"></div>
             <div class="hero-title">ТВОИ ТРЕНИРОВКИ</div>
+<div style="position: absolute; right: 20px; bottom: 20px; background: rgba(0,0,0,0.5); padding: 5px 12px; border-radius: 30px; display: flex; align-items: center; gap: 5px;">
+    <span id="streak-number" style="font-size: 18px; font-weight: bold; color: white;">0</span>
+    <span style="font-size: 20px;">🔥</span>
+</div>
             <button class="calendar-btn" id="calendar-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="3" y="4" width="18" height="18" rx="2" stroke="white" stroke-width="1.5" fill="none"/>
@@ -239,43 +243,41 @@
     <script src="calendar.js"></script>
     <script src="app.js"></script>
 
-    <script>
-// Автоматическое добавление тренировок в календарь
+<script>
+// ПОЛНЫЙ СБРОС + ДОБАВЛЕНИЕ ТРЕНИРОВОК + СОХРАНЕНИЕ СЧЕТЧИКОВ
 (function() {
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
     
-    // Данные для добавления
-    const workoutsToAdd = {
+    // 1. ОЧИЩАЕМ календарь и создаем новый
+    console.log('🗑️ Очищаем старые данные календаря...');
+    
+    const newHistory = {
         [`${year}-${month}-12`]: ['РУКИ'],
         [`${year}-${month}-14`]: ['РУКИ'],
         [`${year}-${month}-15`]: ['ПРЕСС']
     };
     
-    // Загружаем текущую историю
-    let history = {};
-    const saved = localStorage.getItem('workoutHistory');
-    if (saved) {
-        try {
-            history = JSON.parse(saved);
-        } catch(e) {}
-    }
+    localStorage.setItem('workoutHistory', JSON.stringify(newHistory));
     
-    // Добавляем тренировки
-    let added = false;
-    for (const [date, workouts] of Object.entries(workoutsToAdd)) {
-        if (!history[date]) {
-            history[date] = workouts;
-            added = true;
-        }
-    }
+    // 2. СОХРАНЯЕМ счетчики тренировок (разминка 1, руки 2, пресс 1)
+    const completions = {
+        warmup: 1,
+        arms: 2,
+        abs: 1,
+        chest: 0,
+        back: 0,
+        legs: 0
+    };
+    localStorage.setItem('workoutCompletions', JSON.stringify(completions));
     
-    // Сохраняем только если были добавления
-    if (added) {
-        localStorage.setItem('workoutHistory', JSON.stringify(history));
-        console.log('✅ Тренировки добавлены в календарь: 12,14 числа - РУКИ, 15 числа - ПРЕСС');
-    }
+    console.log('✅ Календарь обновлен!');
+    console.log(`   ${year}-${month}-12 → РУКИ`);
+    console.log(`   ${year}-${month}-14 → РУКИ`);
+    console.log(`   ${year}-${month}-15 → ПРЕСС`);
+    console.log('✅ Счетчики: Разминка 1, Руки 2, Пресс 1');
+    console.log('\n🔄 Обновите страницу (F5)');
 })();
 </script>
 
