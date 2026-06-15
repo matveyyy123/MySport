@@ -238,5 +238,46 @@
     <script src="data.js"></script>
     <script src="calendar.js"></script>
     <script src="app.js"></script>
+
+    <script>
+// Автоматическое добавление тренировок в календарь
+(function() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    
+    // Данные для добавления
+    const workoutsToAdd = {
+        [`${year}-${month}-12`]: ['РУКИ'],
+        [`${year}-${month}-14`]: ['РУКИ'],
+        [`${year}-${month}-15`]: ['ПРЕСС']
+    };
+    
+    // Загружаем текущую историю
+    let history = {};
+    const saved = localStorage.getItem('workoutHistory');
+    if (saved) {
+        try {
+            history = JSON.parse(saved);
+        } catch(e) {}
+    }
+    
+    // Добавляем тренировки
+    let added = false;
+    for (const [date, workouts] of Object.entries(workoutsToAdd)) {
+        if (!history[date]) {
+            history[date] = workouts;
+            added = true;
+        }
+    }
+    
+    // Сохраняем только если были добавления
+    if (added) {
+        localStorage.setItem('workoutHistory', JSON.stringify(history));
+        console.log('✅ Тренировки добавлены в календарь: 12,14 числа - РУКИ, 15 числа - ПРЕСС');
+    }
+})();
+</script>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-// calendar.js - Календарь и статистика
+// calendar.js - Календарь и статистика (без разминки)
 
 function loadWorkoutHistory() {
     const saved = localStorage.getItem('workoutHistory');
@@ -19,13 +19,13 @@ function getWorkoutStyleForDate(year, month, day) {
     const workouts = history[dateKey];
     if (!workouts || workouts.length === 0) return { class: '', style: '' };
     
+    // Убрал РАЗМИНКУ из colorMap
     const colorMap = {
         'РУКИ': '#e74c3c',
         'ГРУДЬ': '#e67e22',
         'ПРЕСС': '#27ae60',
         'СПИНА': '#3498db',
-        'НОГИ': '#9b59b6',
-        'РАЗМИНКА': '#95a5a6'
+        'НОГИ': '#9b59b6'
     };
     
     const colors = workouts.map(w => colorMap[w]).filter(c => c);
@@ -50,14 +50,14 @@ function getWorkoutStyleForDate(year, month, day) {
 
 function getMonthlyStats(year, month) {
     const history = loadWorkoutHistory();
-    const stats = { arms: 0, chest: 0, abs: 0, back: 0, legs: 0, warmup: 0 };
+    // Убрал warmup из статистики
+    const stats = { arms: 0, chest: 0, abs: 0, back: 0, legs: 0 };
     const workoutNames = { 
         'РУКИ': 'arms', 
         'ГРУДЬ': 'chest', 
         'ПРЕСС': 'abs', 
         'СПИНА': 'back', 
-        'НОГИ': 'legs',
-        'РАЗМИНКА': 'warmup'
+        'НОГИ': 'legs'
     };
     
     for (const [dateKey, workouts] of Object.entries(history)) {
@@ -77,9 +77,10 @@ function getMonthlyStats(year, month) {
 function updateLegendStats(year, month) {
     const stats = getMonthlyStats(year, month);
     const legendItems = document.querySelectorAll('.legend-item');
-    const workoutKeys = ['arms', 'chest', 'abs', 'back', 'legs', 'warmup'];
-    const workoutNames = ['РУКИ', 'ГРУДЬ', 'ПРЕСС', 'СПИНА', 'НОГИ', 'РАЗМИНКА'];
-    const colors = ['#e74c3c', '#e67e22', '#27ae60', '#3498db', '#9b59b6', '#95a5a6'];
+    // Убрал warmup из легенды
+    const workoutKeys = ['arms', 'chest', 'abs', 'back', 'legs'];
+    const workoutNames = ['РУКИ', 'ГРУДЬ', 'ПРЕСС', 'СПИНА', 'НОГИ'];
+    const colors = ['#e74c3c', '#e67e22', '#27ae60', '#3498db', '#9b59b6'];
     
     legendItems.forEach((item, index) => {
         if (index < workoutKeys.length) {
@@ -146,7 +147,6 @@ function initCalendar() {
     
     function openCalendarModal() {
         if (calendarModal) {
-            // Обновляем данные перед открытием
             currentYear = new Date().getFullYear();
             currentMonth = new Date().getMonth();
             renderCalendar(currentYear, currentMonth);
@@ -183,7 +183,6 @@ function initCalendar() {
     if (nextMonthBtn) nextMonthBtn.addEventListener('click', nextMonth);
 }
 
-// Запускаем инициализацию календаря после загрузки DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCalendar);
 } else {
