@@ -248,6 +248,39 @@
     <script src="data.js"></script>
     <script src="calendar.js"></script>
     <script src="app.js"></script>
+    <script src="streak.js"></script>
+
+<script>
+// ПОЛНЫЙ СБРОС + ДОБАВЛЕНИЕ ТРЕНИРОВОК + СОХРАНЕНИЕ СЧЕТЧИКОВ
+(function() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    
+    // 1. ОЧИЩАЕМ календарь и создаем новый
+    console.log('🗑️ Очищаем старые данные календаря...');
+    
+    const newHistory = {
+        [`${year}-${month}-12`]: ['РУКИ'],
+        [`${year}-${month}-14`]: ['РУКИ'],
+        [`${year}-${month}-15`]: ['ГРУДЬ'],
+        [`${year}-${month}-15`]: ['ПРЕСС']
+    };
+    
+    localStorage.setItem('workoutHistory', JSON.stringify(newHistory));
+    
+    // 2. СОХРАНЯЕМ счетчики тренировок (разминка 1, руки 2, пресс 1, грудь 1)
+    const completions = {
+        warmup: 1,
+        arms: 2,
+        abs: 1,
+        chest: 1,
+        back: 0,
+        legs: 0
+    };
+    localStorage.setItem('workoutCompletions', JSON.stringify(completions));
+})();
+</script>
 
 </body>
 </html>
