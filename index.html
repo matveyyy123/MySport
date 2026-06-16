@@ -263,8 +263,7 @@
     const newHistory = {
         [`${year}-${month}-12`]: ['РУКИ'],
         [`${year}-${month}-14`]: ['РУКИ'],
-        [`${year}-${month}-15`]: ['ГРУДЬ'],
-        [`${year}-${month}-15`]: ['ПРЕСС']
+        [`${year}-${month}-15`]: ['ГРУДЬ', 'ПРЕСС']  // ← ИСПРАВЛЕНО: две тренировки в один день
     };
     
     localStorage.setItem('workoutHistory', JSON.stringify(newHistory));
@@ -279,6 +278,11 @@
         legs: 0
     };
     localStorage.setItem('workoutCompletions', JSON.stringify(completions));
+    
+    console.log('✅ Данные обновлены!');
+    console.log('   Календарь:', newHistory);
+    console.log('   Счетчики:', completions);
+    console.log('\n🔄 Обновите страницу (F5)');
 })();
 </script>
 
