@@ -79,19 +79,18 @@ const workoutsData = {
     chest: {
         name: "ГРУДЬ",
         time: "25 минут",
-        exercisesCount: "10 упражнений",
+        exercisesCount: "9 упражнений",
         heroImg: "images/chest.jpg",
         exercises: [
-            { name: "Отжимания от коленей", reps: "3x12", img: "images/exercises/chest1.jpg" },
-            { name: "Отжимания с упором спереди", reps: "3x12", img: "images/exercises/chest2.jpg" },
-            { name: "Лежа поднятия гантелей от плеч наверх", reps: "3x12", img: "images/exercises/chest3.jpg" },
-            { name: "Отжимания от пола", reps: "3x12", img: "images/exercises/chest4.jpg" },
-            { name: "Обратные отжимания от стула", reps: "3x12", img: "images/exercises/chest5.jpg" },
-            { name: "Отжимания с упором сзади", reps: "3x12", img: "images/exercises/chest6.jpg" },
-            { name: "Лежа поднятия гантелей от груди наверх", reps: "3x12", img: "images/exercises/chest7.jpg" },
-            { name: "Широкие отжимания", reps: "3x12", img: "images/exercises/chest8.jpg" },
-            { name: "Лежа поднятие гантелей от сторон наверх", reps: "3x12", img: "images/exercises/chest9.jpg" },
-            { name: "Отжимания со сведенными ладонями", reps: "3x12", img: "images/exercises/chest10.jpg" }
+            { name: "Отжимания от коленей", reps: "1x12", img: "images/exercises/chest1.jpg" },
+            { name: "Отжимания с упором спереди", reps: "3x10", img: "images/exercises/chest2.jpg" },
+            { name: "Отжимания от пола", reps: "3x8", img: "images/exercises/chest3.jpg" },
+            { name: "Обратные отжимания от стула", reps: "3x12", img: "images/exercises/chest4.jpg" },
+            { name: "Широкие отжимания", reps: "3x6", img: "images/exercises/chest5.jpg" },
+            { name: "Лежа поднятия гантелей от груди наверх", reps: "3x12", img: "images/exercises/chest6.jpg" },
+            { name: "Отжимания с упором сзади", reps: "3x4", img: "images/exercises/chest7.jpg" },
+            { name: "Лежа поднятие гантелей от сторон наверх", reps: "3x12", img: "images/exercises/chest8.jpg" },
+            { name: "Отжимания со сведенными ладонями", reps: "3x2", img: "images/exercises/chest9.jpg" }
         ]
     },
     back: {

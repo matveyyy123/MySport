@@ -23,7 +23,6 @@ function loadCompletions() {
         resetCompletions();
     }
     
-    // Дополнительная проверка на валидность
     for (let key in completions) {
         if (typeof completions[key] !== 'number' || isNaN(completions[key])) {
             completions[key] = 0;
@@ -38,7 +37,6 @@ function resetCompletions() {
 function saveCompletions() {
     try {
         localStorage.setItem('workoutCompletions', JSON.stringify(completions));
-        // Проверка сохранения
         const saved = localStorage.getItem('workoutCompletions');
         if (!saved) {
             console.error('Не удалось сохранить данные в localStorage');
@@ -70,13 +68,11 @@ let timerInterval = null;
 let timerSeconds = 0;
 let isTimerRunning = false;
 
-// Кеш для загруженных изображений
 const imageCache = {};
 
 function loadImageWithCache(src, imgElement, fallbackColor = '#ffffff') {
     if (!imgElement) return;
     
-    // Если изображение уже в кеше, используем его
     if (imageCache[src]) {
         imgElement.src = imageCache[src];
         imgElement.style.display = 'block';
@@ -87,7 +83,6 @@ function loadImageWithCache(src, imgElement, fallbackColor = '#ffffff') {
         return;
     }
     
-    // Показываем индикатор загрузки
     imgElement.style.opacity = '0.5';
     imgElement.style.display = 'block';
     
@@ -117,7 +112,6 @@ function loadImageWithCache(src, imgElement, fallbackColor = '#ffffff') {
     img.src = src;
 }
 
-// DOM элементы
 const splash = document.getElementById('splash');
 const mainMenu = document.getElementById('main-menu');
 const workoutScreen = document.getElementById('workout-screen');
@@ -150,7 +144,6 @@ function openWorkout(workoutType) {
     const workoutExercisesCountSpan = document.getElementById('workout-exercises-count');
     const exercisesListDiv = document.getElementById('exercises-list');
     
-    // Загружаем изображение героя
     if (workoutHeroImg) {
         loadImageWithCache(data.heroImg, workoutHeroImg, '#ffffff');
     }
@@ -159,7 +152,6 @@ function openWorkout(workoutType) {
     workoutTimeSpan.textContent = data.time;
     workoutExercisesCountSpan.textContent = data.exercisesCount;
     
-    // Создаем список упражнений с предзагрузкой изображений
     exercisesListDiv.innerHTML = '';
     data.exercises.forEach((ex, idx) => {
         const exerciseDiv = document.createElement('div');
@@ -173,7 +165,6 @@ function openWorkout(workoutType) {
         `;
         exercisesListDiv.appendChild(exerciseDiv);
         
-        // Предзагружаем изображение упражнения в кеш
         if (ex.img && !imageCache[ex.img]) {
             const preloadImg = new Image();
             preloadImg.src = ex.img;
@@ -193,7 +184,6 @@ function closeWorkout() {
     finishScreen.classList.add('hidden');
     mainMenu.classList.remove('hidden');
     
-    // Обновляем отображение счетчиков
     setTimeout(() => {
         updateCompletionDisplay();
     }, 100);
@@ -231,12 +221,10 @@ function loadExercise(index) {
     activeExerciseName.textContent = exercise.name;
     activeExerciseReps.textContent = exercise.reps;
     
-    // Загружаем изображение с кешированием
     if (activeExerciseImg) {
         loadImageWithCache(exercise.img, activeExerciseImg, '#ffffff');
     }
     
-    // Обновляем видимость кнопок
     if (index === 0) {
         prevExerciseBtn.classList.add('hidden');
     } else {
@@ -307,7 +295,6 @@ function addWorkoutToHistory(workoutType) {
     }
 }
 
-// МОДАЛЬНОЕ ОКНО ДЛЯ КОДА
 function showCodeModal(onSuccess, onFail) {
     const modal = document.getElementById('code-modal');
     if (!modal) return;
@@ -318,12 +305,10 @@ function showCodeModal(onSuccess, onFail) {
     const knowBtn = document.getElementById('code-know-btn');
     const notKnowBtn = document.getElementById('code-not-know-btn');
     
-    // Очищаем инпуты
     codeInputs.forEach(input => {
         input.value = '';
     });
     
-    // Фокусируемся на первом инпуте
     setTimeout(() => {
         if (codeInputs[0]) codeInputs[0].focus();
     }, 100);
@@ -350,7 +335,6 @@ function showCodeModal(onSuccess, onFail) {
             onSuccess();
         } else {
             alert('Неверный код');
-            // Очищаем инпуты при неверном коде
             codeInputs.forEach(input => {
                 input.value = '';
             });
@@ -381,17 +365,8 @@ function showFinishScreen() {
     const durationFormatted = timerDisplay.textContent;
     
     const workoutType = currentWorkoutType;
-    const workoutNameForHistory = {
-        warmup: 'РАЗМИНКА',
-        legs: 'НОГИ',
-        arms: 'РУКИ',
-        abs: 'ПРЕСС',
-        chest: 'ГРУДЬ',
-        back: 'СПИНА'
-    }[workoutType];
     
     showCodeModal(
-        // Успех (код верный) - добавляем в счетчик и историю
         () => {
             if (typeof completions[workoutType] === 'number') {
                 completions[workoutType]++;
@@ -415,7 +390,6 @@ function showFinishScreen() {
             finishScreen.classList.remove('hidden');
             setBodyBackground('#4682B4');
         },
-        // Провал - показываем финиш без сохранения
         () => {
             finishWorkoutName.textContent = data.name;
             finishExercisesCount.textContent = exercisesCount;
@@ -441,7 +415,6 @@ function finishWorkoutAndExit() {
     timerSeconds = 0;
     updateTimerDisplay();
     
-    // Обновляем отображение счетчиков
     setTimeout(() => {
         updateCompletionDisplay();
     }, 100);
@@ -476,11 +449,9 @@ function updateTimerDisplay() {
     }
 }
 
-// Предзагрузка всех изображений тренировок
 function preloadAllImages() {
     const allImages = [];
     
-    // Собираем все URL изображений из данных тренировок
     for (const workoutType in workoutsData) {
         const workout = workoutsData[workoutType];
         if (workout.heroImg) {
@@ -495,10 +466,8 @@ function preloadAllImages() {
         }
     }
     
-    // Добавляем финишное изображение
     allImages.push('images/finish.jpg');
     
-    // Предзагружаем все изображения
     allImages.forEach(src => {
         if (!imageCache[src]) {
             const img = new Image();
@@ -513,15 +482,10 @@ function preloadAllImages() {
     });
 }
 
-// Инициализация обработчиков событий
 function initApp() {
-    // Сначала загружаем данные
     loadCompletions();
-    
-    // Предзагружаем изображения
     preloadAllImages();
     
-    // Загрузочный экран
     setTimeout(() => {
         if (splash) {
             splash.style.opacity = '0';
@@ -529,7 +493,6 @@ function initApp() {
                 splash.classList.add('hidden');
                 mainMenu.classList.remove('hidden');
                 
-                // Обновляем отображение счетчиков с задержкой
                 setTimeout(() => {
                     updateCompletionDisplay();
                 }, 50);
@@ -539,7 +502,6 @@ function initApp() {
         }
     }, 1500);
     
-    // Карточки тренировок
     const workoutCards = document.querySelectorAll('.workout-card');
     workoutCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -553,7 +515,6 @@ function initApp() {
         });
     });
     
-    // Кнопки
     if (backBtn) backBtn.addEventListener('click', closeWorkout);
     if (startWorkoutBtn) startWorkoutBtn.addEventListener('click', startActiveWorkout);
     if (activeBackBtn) activeBackBtn.addEventListener('click', closeWorkout);
@@ -563,31 +524,62 @@ function initApp() {
     if (finishCloseBtn) finishCloseBtn.addEventListener('click', finishWorkoutAndExit);
 }
 
-// Запуск приложения после полной загрузки DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
 }
 
-// Сохраняем данные при закрытии страницы (на всякий случай)
 window.addEventListener('beforeunload', () => {
     saveCompletions();
 });
 
-// Счетчик дней тренировок подряд (streak)
+// ========== ОГОНЕК С СЕРИЕЙ (STREAK) С ИКОНКАМИ БАТАРЕИ ==========
 function updateStreakDisplay() {
-    // Получаем историю тренировок
     const saved = localStorage.getItem('workoutHistory');
-    if (!saved) return;
+    const streakSpan = document.getElementById('streak-number');
+    const iconElement = document.getElementById('streak-icon');
+    
+    if (!streakSpan || !iconElement) return;
+    
+    // Если нет истории — показываем 0 и красную пустую батарею
+    if (!saved) {
+        streakSpan.textContent = '0';
+        iconElement.className = 'fa-solid fa-battery-empty';
+        iconElement.style.color = '#ef4444';
+        iconElement.style.textShadow = 'none';
+        return;
+    }
     
     try {
         const workouts = JSON.parse(saved);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
         
-        // Считаем сколько дней подряд были тренировки
+        // Проверяем была ли тренировка сегодня
+        const todayStr = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+        const hasTodayWorkout = workouts[todayStr] && workouts[todayStr].length > 0;
+        
+        // Проверяем была ли тренировка вчера
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = `${yesterday.getFullYear()}-${yesterday.getMonth() + 1}-${yesterday.getDate()}`;
+        const hasYesterdayWorkout = workouts[yesterdayStr] && workouts[yesterdayStr].length > 0;
+        
+        // Проверяем была ли тренировка позавчера
+        const dayBeforeYesterday = new Date(today);
+        dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
+        const dayBeforeYesterdayStr = `${dayBeforeYesterday.getFullYear()}-${dayBeforeYesterday.getMonth() + 1}-${dayBeforeYesterday.getDate()}`;
+        const hasDayBeforeYesterdayWorkout = workouts[dayBeforeYesterdayStr] && workouts[dayBeforeYesterdayStr].length > 0;
+        
+        // Считаем серию
         let streak = 0;
-        let currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
+        let currentDate = new Date(today);
+        
+        // Если сегодня нет тренировки - считаем со вчера
+        if (!hasTodayWorkout) {
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
         
         while (true) {
             const dateStr = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
@@ -600,24 +592,66 @@ function updateStreakDisplay() {
             }
         }
         
-        // Обновляем цифру на странице
-        const streakSpan = document.getElementById('streak-number');
-        if (streakSpan) {
-            streakSpan.textContent = streak;
+        // Обновляем цифру
+        streakSpan.textContent = streak;
+        
+        // ===== ОПРЕДЕЛЯЕМ ИКОНКУ И ЦВЕТ =====
+        if (streak === 0) {
+            // Нет серии - красная пустая батарея
+            iconElement.className = 'fa-solid fa-battery-empty';
+            iconElement.style.color = '#ef4444'; // Красный
+            iconElement.style.textShadow = 'none';
+        } else if (hasTodayWorkout) {
+            // Сегодня была тренировка - зеленая полная батарея (горит)
+            iconElement.className = 'fa-solid fa-battery-full';
+            iconElement.style.color = '#22c55e'; // Зеленый
+            iconElement.style.textShadow = '0 0 20px rgba(34, 197, 94, 0.6)';
+        } else if (hasYesterdayWorkout && !hasTodayWorkout) {
+            // Сегодня нет, но вчера была - желтая половина (ждет)
+            iconElement.className = 'fa-solid fa-battery-half';
+            iconElement.style.color = '#eab308'; // Желтый
+            iconElement.style.textShadow = 'none';
+        } else if (hasDayBeforeYesterdayWorkout && !hasYesterdayWorkout && !hasTodayWorkout) {
+            // Наступил след день, серию держим (шанс еще один день) - оранжевая пустая
+            iconElement.className = 'fa-solid fa-battery-empty';
+            iconElement.style.color = '#f97316'; // Оранжевый
+            iconElement.style.textShadow = 'none';
+        } else {
+            // Ничего не было и наступил след день - красная пустая
+            iconElement.className = 'fa-solid fa-battery-empty';
+            iconElement.style.color = '#ef4444'; // Красный
+            iconElement.style.textShadow = 'none';
         }
+        
     } catch(e) {
-        console.log('Ошибка подсчета streak');
+        console.log('Ошибка подсчета streak:', e);
+        streakSpan.textContent = '0';
+        const iconElement = document.getElementById('streak-icon');
+        if (iconElement) {
+            iconElement.className = 'fa-solid fa-battery-empty';
+            iconElement.style.color = '#ef4444';
+            iconElement.style.textShadow = 'none';
+        }
     }
 }
 
-// Запускаем при загрузке страницы
+// Запускаем при загрузке
 updateStreakDisplay();
 
-// Обновляем после завершения тренировки (перехватываем сохранение)
+// Обновляем при изменении истории
 const originalSetItem = localStorage.setItem;
 localStorage.setItem = function(key, value) {
     originalSetItem.apply(this, arguments);
     if (key === 'workoutHistory') {
-        updateStreakDisplay();
+        setTimeout(updateStreakDisplay, 100);
     }
 };
+
+// Также обновляем после завершения тренировки
+const originalFinish = finishWorkoutAndExit;
+if (typeof originalFinish === 'function') {
+    window.finishWorkoutAndExit = function() {
+        originalFinish();
+        setTimeout(updateStreakDisplay, 200);
+    };
+}
