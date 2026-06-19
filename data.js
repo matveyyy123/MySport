@@ -4,15 +4,16 @@ const workoutsData = {
     warmup: {
         name: "РАЗМИНКА",
         time: "5 минут",
-        exercisesCount: "9 упражнений",
+        exercisesCount: "10 упражнений",
         heroImg: "images/warmup.jpg",
         exercises: [
             { name: "Вращение головой", reps: "2x10", img: "images/exercises/warmup1.jpg" },
             { name: "Махи руками", reps: "2x10", img: "images/exercises/warmup2.jpg" },
             { name: "Вращение локтями", reps: "2x10", img: "images/exercises/warmup3.jpg" },
             { name: "Вращение кистями", reps: "2x10", img: "images/exercises/warmup4.jpg" },
-            { name: "Наклоны корпуса", reps: "2x10", img: "images/exercises/warmup5.jpg" },
-            { name: "Вращение тазом", reps: "1x10", img: "images/exercises/warmup6.jpg" },
+            { name: "Наклоны корпуса в стороны", reps: "2x10", img: "images/exercises/warmup5.jpg" },
+            { name: "Наклоны корпуса прямо", reps: "3x10", img: "images/exercises/warmup10.jpg" },
+            { name: "Вращение тазом", reps: "2x10", img: "images/exercises/warmup6.jpg" },
             { name: "Вращение ногами", reps: "4x5", img: "images/exercises/warmup7.jpg" },
             { name: "Приседания без веса", reps: "1x10", img: "images/exercises/warmup8.jpg" },
             { name: "Прыжки", reps: "1x30", img: "images/exercises/warmup9.jpg" }
@@ -78,7 +79,7 @@ const workoutsData = {
     },
     chest: {
         name: "ГРУДЬ",
-        time: "25 минут",
+        time: "40 минут",
         exercisesCount: "9 упражнений",
         heroImg: "images/chest.jpg",
         exercises: [
